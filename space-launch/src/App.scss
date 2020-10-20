@@ -189,16 +189,39 @@ body {
 }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
 	.data-list {
 		&:after,
 		li {
-			width: calc(50% - 8px);
+			width: 100% !important;
 		}
+		& .title{
+			& img{
+				width: 100%;
+			}
+		}
+
 	}
 }
 
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+	nav{
+		width: 30% !important;
+	}
+	button{
+		width:60% !important;
+		margin-left: 20% !important;
+	}
+.data-list:after, .data-list li {
+	width: 48% !important;
+	
+}
+.data-list li .title img{
+	width: 100% !important;	
+}
+}
 @media only screen and (max-width: 400px) {
+
 	.data-list {
 		&:after,
 		li {

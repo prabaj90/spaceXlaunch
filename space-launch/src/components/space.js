@@ -128,8 +128,8 @@ filterByLaunch = launch => {
     
 	  <div className="">
   <div className="">
-    <button className=""  onClick={() => this.filterByLaunch(true)}>true</button>
-  <button className=""  onClick={() => this.filterByLaunch(false)}>false</button>
+    <button className=""  onClick={() => this.filterByLaunch(true)}>True</button>
+  <button className=""  onClick={() => this.filterByLaunch(false)}>False</button>
     
   </div>
   </div>
@@ -138,8 +138,8 @@ filterByLaunch = launch => {
     
 	  <div className="">
   <div className="">
-     <button className=""  onClick={() => this.filterByLanding(true)}>true</button>
-  <button className=""  onClick={() => this.filterByLanding(false)}>false</button>
+     <button className=""  onClick={() => this.filterByLanding(true)}>True</button>
+  <button className=""  onClick={() => this.filterByLanding(false)}>False</button>
   </div>
   </div>
     </ul>
