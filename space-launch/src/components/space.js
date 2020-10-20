@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {URL} from './constant';
-// import './style.scss';
 
 export default class AppDev extends Component {
 
@@ -29,29 +28,21 @@ export default class AppDev extends Component {
 			})
 			.catch(err => {});
 	}
-
-	_onKeyUp = e => {
-		// filter post list by title using onKeyUp function
-		const post = this.state.allPosts.filter(item =>
-			item.mission_name.toLowerCase().includes(e.target.value.toLowerCase())
-		);
-		this.setState({ post: post });
-	};
   
-  _filterByYear = year => {
+  filterByYear = year => {
         const post = this.state.allPosts.filter(item =>
             item.launch_year === year
         );
         this.setState({ post: post });
 }
-_filterByLaunch = launch => {
+filterByLaunch = launch => {
 	const post = this.state.allPosts.filter(item =>
 	item.launch_success === launch
 	);
 	this.setState({ post: post });
     }
     
-  _filterByLanding = landing => {
+  filterByLanding = landing => {
 	const post = this.state.allPosts.filter(item =>
 	item.rocket.first_stage.cores[0].land_success === landing
 	);
@@ -65,8 +56,9 @@ _filterByLaunch = launch => {
       
 			<div className="container-fluid">
         <header>
-  <h2>Project</h2>
+  <h2>SpaceX Launch Programs</h2>
 </header>
+
         <section>
         <nav>
  
@@ -77,56 +69,56 @@ _filterByLaunch = launch => {
     <p>Launch Year</p>
         <div className="">
   <div className="">
-    <button className=""  onClick={() => this._filterByYear('2006')}>2006</button>
-    <button className=""  onClick={() => this._filterByYear('2007')}>2007</button>
+    <button className=""  onClick={() => this.filterByYear('2006')}>2006</button>
+    <button className=""  onClick={() => this.filterByYear('2007')}>2007</button>
     
   </div>
   </div>
   <div className="">
   <div className="">
-    <button className=""  onClick={() => this._filterByYear('2008')}>2008</button>
-    <button className=""  onClick={() => this._filterByYear('2009')}>2009</button>
+    <button className=""  onClick={() => this.filterByYear('2008')}>2008</button>
+    <button className=""  onClick={() => this.filterByYear('2009')}>2009</button>
     
   </div>
   </div>
   <div className="">
   <div className="">
-    <button className=""  onClick={() => this._filterByYear('2010')}>2010</button>
-    <button className=""  onClick={() => this._filterByYear('2011')}>2011</button>
+    <button className=""  onClick={() => this.filterByYear('2010')}>2010</button>
+    <button className=""  onClick={() => this.filterByYear('2011')}>2011</button>
     
   </div>
   </div>
   <div className="">
   <div className="">
-    <button className=""  onClick={() => this._filterByYear('2012')}>2012</button>
-    <button className=""  onClick={() => this._filterByYear('2013')}>2013</button>
+    <button className=""  onClick={() => this.filterByYear('2012')}>2012</button>
+    <button className=""  onClick={() => this.filterByYear('2013')}>2013</button>
     
   </div>
   </div>
   <div className="">
   <div className="">
-    <button className=""  onClick={() => this._filterByYear('2014')}>2014</button>
-    <button className=""  onClick={() => this._filterByYear('2015')}>2015</button>
+    <button className=""  onClick={() => this.filterByYear('2014')}>2014</button>
+    <button className=""  onClick={() => this.filterByYear('2015')}>2015</button>
     
   </div>
   </div>
   <div className="">
   <div className="">
-    <button className=""  onClick={() => this._filterByYear('2016')}>2016</button>
-    <button className=""  onClick={() => this._filterByYear('2017')}>2017</button>
+    <button className=""  onClick={() => this.filterByYear('2016')}>2016</button>
+    <button className=""  onClick={() => this.filterByYear('2017')}>2017</button>
     
   </div>
   </div>
   <div className="">
   <div className="">
-    <button className=""  onClick={() => this._filterByYear('2018')}>2018</button>
-    <button className=""  onClick={() => this._filterByYear('2019')}>2019</button>
+    <button className=""  onClick={() => this.filterByYear('2018')}>2018</button>
+    <button className=""  onClick={() => this.filterByYear('2019')}>2019</button>
     
   </div>
   </div>
   <div className="">
   <div className="">
-    <button class=""  onClick={() => this._filterByYear('2020')}>2020</button>
+    <button class=""  onClick={() => this.filterByYear('2020')}>2020</button>
     
     
   </div>
@@ -136,8 +128,8 @@ _filterByLaunch = launch => {
     
 	  <div className="">
   <div className="">
-    <button className=""  onClick={() => this._filterByLaunch(true)}>true</button>
-  <button className=""  onClick={() => this._filterByLaunch(false)}>false</button>
+    <button className=""  onClick={() => this.filterByLaunch(true)}>true</button>
+  <button className=""  onClick={() => this.filterByLaunch(false)}>false</button>
     
   </div>
   </div>
@@ -146,8 +138,8 @@ _filterByLaunch = launch => {
     
 	  <div className="">
   <div className="">
-     <button className=""  onClick={() => this._filterByLanding(true)}>true</button>
-  <button className=""  onClick={() => this._filterByLanding(false)}>false</button>
+     <button className=""  onClick={() => this.filterByLanding(true)}>true</button>
+  <button className=""  onClick={() => this.filterByLanding(false)}>false</button>
   </div>
   </div>
     </ul>
@@ -161,7 +153,7 @@ _filterByLaunch = launch => {
 <li className={"block-" + index}>
 <div className="title">
 <img src={item.links.mission_patch_small} />
-<h3>{item.mission_name}</h3>
+<h3>{item.mission_name}  #{item.flight_number}</h3>
 <h5>Mission Ids: {item.mission_id.length === 0 ? "0" : item.mission_id.map((id, index) => <span key={index}>{ (index ? ', ' : '') + id }</span>)}</h5>
 <h5>Launch Year: {item.launch_year}</h5>
 <h5>Successful Launch: {item.launch_success ? "True" : "False"}</h5>
@@ -174,7 +166,7 @@ _filterByLaunch = launch => {
             
         </section>
           
-				
+        
 				
 			</div>
 		);
