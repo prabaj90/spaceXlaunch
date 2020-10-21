@@ -8,7 +8,10 @@ export default class AppDev extends Component {
     super(props);
     this.state = {
       post: [],
-      allPosts: []
+      allPosts: [],
+      year:'',
+      launchPost:'',
+      landingSuccess:''
     };
   }
 
@@ -24,38 +27,82 @@ export default class AppDev extends Component {
       .then(({ data }) => {
         this.setState({
           post: data,
-          allPosts: data // array data from JSON stored in these
+          allPosts: data 
         });
       })
       .catch(err => { });
   }
 
-  filterByOptions = (key, e) => {
-    const { allPosts } = this.state;
-    if (key === 'year') {
-      const post = allPosts.filter(item =>
-        item.launch_year === e.target.innerHTML
-      );
-      this.setState({ post: post });
-    }
-    else if (key === 'launch') {
-      const post = allPosts.filter(item =>
-        item.launch_success === JSON.parse((e.target.innerHTML).toLowerCase())
-      );
-      this.setState({ post: post });
-    }
-    else if (key === 'landing') {
-      const post = allPosts.filter(item =>
-        item.rocket.first_stage.cores[0].land_success === JSON.parse((e.target.innerHTML).toLowerCase())
-      );
-      this.setState({ post: post });
-    }
+  filterByOptions=(key, e)=>{
+    const { allPosts, year, launchPost, landingSuccess  } = this.state;
+    let url = URL;
+    if(key === 'year'){
+     let year = e.target.innerHTML;
+    if(launchPost && landingSuccess){
+       url = URL+'&launch_success='+launchPost+'&land_success='+landingSuccess+'&launch_year='+year;
+     }
+    else if(launchPost){
+      url = URL+'&launch_success='+launchPost+'&launch_year='+year;
+     }
+    else if(landingSuccess){
+      url = URL+'&land_success='+landingSuccess+'&launch_year='+year;
+     }
     else {
-      this.setState({ post: allPosts });
+      url = URL+'&launch_year='+year;
     }
+    this.setState({year: year})
+   }
+   else if(key === 'launch'){
+    let launchPost = JSON.parse((e.target.innerHTML).toLowerCase());
+   if((landingSuccess || !landingSuccess) && year){
+      url = URL+'&launch_success='+launchPost+'&land_success='+landingSuccess+'&launch_year='+year;
+    }
+   else if(year){
+     url = URL+'&launch_success='+launchPost+'&launch_year='+year;
+    }
+   else if(landingSuccess || !landingSuccess){
+     url = URL+'&land_success='+landingSuccess+'&launch_success='+launchPost;
+    }
+   else {
+     url = URL+'&launch_success='+launchPost;
+    }
+  
+  this.setState({launchPost: launchPost});  
+  }
+  else if(key === 'landing'){
+    let landingSuccess = JSON.parse((e.target.innerHTML).toLowerCase());
+   if((launchPost || !launchPost) && year){
+      url = URL+'&launch_success='+launchPost+'&land_success='+landingSuccess+'&launch_year='+year;
+    }
+   else if(year){
+     url = URL+'&land_success='+landingSuccess+'&launch_year='+year;
+    }
+   else if(launchPost || !launchPost){
+     url = URL+'&land_success='+landingSuccess+'&launch_success='+launchPost;
+    }
+   else {
+     url = URL+'&land_success='+landingSuccess;
+    }
+    this.setState({landingSuccess: landingSuccess});
+  }
+  axios
+  .get(url, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }
+
+  })
+  .then(({ data }) => {
+    this.setState({
+      post: data
+    });
+  })
+  .catch(err => { });
 
   }
   render() {
+    const {year, landingSuccess, launchPost} = this.state;
     return (
 
       <div className="container-fluid">
@@ -66,63 +113,61 @@ export default class AppDev extends Component {
         <section>
           <nav>
 
-
-
             <ul>
               <h1>Filters</h1>
               <p>Launch Year</p>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2006</button>
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2007</button>
+                  <button className={year==='2006'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2006</button>
+                  <button className={year==='2007'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2007</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2008</button>
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2009</button>
+                  <button className={year==='2008'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2008</button>
+                  <button className={year==='2009'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2009</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2010</button>
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2011</button>
+                  <button className={year==='2010'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2010</button>
+                  <button className={year==='2011'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2011</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2012</button>
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2013</button>
+                  <button className={year==='2012'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2012</button>
+                  <button className={year==='2013'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2013</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2014</button>
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2015</button>
+                  <button className={year==='2014'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2014</button>
+                  <button className={year==='2015'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2015</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2016</button>
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2017</button>
+                  <button className={year==='2016'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2016</button>
+                  <button className={year==='2017'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2017</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2018</button>
-                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2019</button>
+                  <button className={year==='2018'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2018</button>
+                  <button className={year==='2019'? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2019</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button class="" onClick={() => this.filterByOptions('2020')}>2020</button>
+                  <button className={year==='2020'? "selectedButton" : ''} onClick={() => this.filterByOptions('2020')}>2020</button>
 
 
                 </div>
@@ -132,8 +177,8 @@ export default class AppDev extends Component {
 
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByOptions('launch', e)}>True</button>
-                  <button className="" onClick={(e) => this.filterByOptions('launch', e)}>False</button>
+                  <button className={launchPost ===true? "selectedButton" : ''} onClick={(e) => this.filterByOptions('launch', e)}>True</button>
+                  <button className={launchPost ===false? "selectedButton" : ''} onClick={(e) => this.filterByOptions('launch', e)}>False</button>
 
                 </div>
               </div>
@@ -142,8 +187,8 @@ export default class AppDev extends Component {
 
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByOptions('landing', e)}>True</button>
-                  <button className="" onClick={(e) => this.filterByOptions('landing', e)}>False</button>
+                  <button className={landingSuccess ===true? "selectedButton" : ''} onClick={(e) => this.filterByOptions('landing', e)}>True</button>
+                  <button className={landingSuccess ===false? "selectedButton" : ''} onClick={(e) => this.filterByOptions('landing', e)}>False</button>
                 </div>
               </div>
             </ul>
@@ -165,7 +210,7 @@ export default class AppDev extends Component {
                     <h5>Successful Launch: </h5>
                     <h4> {item.launch_success ? "True" : "False"}</h4>
                     <h5>Successful Landing: </h5>
-                    <h4> {item.rocket.first_stage.cores[0].land_success ? "True" : "False"}</h4>
+                    <h4> {item.rocket.first_stage.cores[0].land_success ? "True" : (item.rocket.first_stage.cores[0].land_success == false) ? "False": 'NULL'}</h4>
                   </div>
                 </li>
               ))}

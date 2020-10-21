@@ -330,3 +330,11 @@ button:hover{
     color: white;
     font-weight: bold;
 }
+
+.selectedButton{
+	background: green;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    font-weight: bold;
+}
