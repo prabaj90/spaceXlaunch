@@ -19,7 +19,7 @@ export default class AppDev extends Component {
           Accept: "application/json",
           "Content-Type": "application/json"
         }
-        
+
       })
       .then(({ data }) => {
         this.setState({
@@ -157,11 +157,15 @@ export default class AppDev extends Component {
                 <li className={"block-" + index}>
                   <div className="title">
                     <img src={item.links.mission_patch_small} />
-                    <h3>{item.mission_name}  #{item.flight_number}</h3>
-                    <h5>Mission Ids: {item.mission_id.length === 0 ? "0" : item.mission_id.map((id, index) => <span key={index}>{(index ? ', ' : '') + id}</span>)}</h5>
-                    <h5>Launch Year: {item.launch_year}</h5>
-                    <h5>Successful Launch: {item.launch_success ? "True" : "False"}</h5>
-                    <h5>Successful Landing: {item.rocket.first_stage.cores[0].land_success ? "True" : "False"}</h5>
+                    <h3> {item.mission_name}  #{item.flight_number}</h3>
+                    <h5>Mission Ids: </h5>
+                    <h4> {item.mission_id.length === 0 ? "0" : item.mission_id.map((id, index) => <span key={index}>{(index ? ', ' : '') + id}</span>)}</h4>
+                    <h5>Launch Year: </h5>
+                    <h4> {item.launch_year}</h4>
+                    <h5>Successful Launch: </h5>
+                    <h4> {item.launch_success ? "True" : "False"}</h4>
+                    <h5>Successful Landing: </h5>
+                    <h4> {item.rocket.first_stage.cores[0].land_success ? "True" : "False"}</h4>
                   </div>
                 </li>
               ))}

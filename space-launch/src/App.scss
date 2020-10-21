@@ -178,6 +178,20 @@ body {
 			text-decoration: none;
 			& img{
 				background: #f7f5f5;
+				width: 100%;
+			}
+			& h3{
+				padding: 5px;
+			}
+			& h5{
+				color: black;
+				display: inline-block;
+				padding: 5px;
+			}
+			& h4{
+				color: blue;
+				display: inline-block;
+				width: 45%;
 			}
 		}
 
@@ -198,6 +212,12 @@ body {
 		& .title{
 			& img{
 				width: 100%;
+			}
+			& h5{
+				padding: 2px !important;
+			}
+			& h3{
+				padding: 2px !important;
 			}
 		}
 
