@@ -29,7 +29,7 @@ export default class AppDev extends Component {
       .catch(err => { });
   }
 
-  filterByYear = (key, e) => {
+  filterByOptions = (key, e) => {
     const { allPosts } = this.state;
     if (key === 'year') {
       const post = allPosts.filter(item =>
@@ -72,56 +72,56 @@ export default class AppDev extends Component {
               <p>Launch Year</p>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2006</button>
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2007</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2006</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2007</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2008</button>
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2009</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2008</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2009</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2010</button>
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2011</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2010</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2011</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2012</button>
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2013</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2012</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2013</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2014</button>
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2015</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2014</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2015</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2016</button>
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2017</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2016</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2017</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2018</button>
-                  <button className="" onClick={(e) => this.filterByYear('year', e)}>2019</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2018</button>
+                  <button className="" onClick={(e) => this.filterByOptions('year', e)}>2019</button>
 
                 </div>
               </div>
               <div className="">
                 <div className="">
-                  <button class="" onClick={() => this.filterByYear('2020')}>2020</button>
+                  <button class="" onClick={() => this.filterByOptions('2020')}>2020</button>
 
 
                 </div>
@@ -131,8 +131,8 @@ export default class AppDev extends Component {
 
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByYear('launch', e)}>True</button>
-                  <button className="" onClick={(e) => this.filterByYear('launch', e)}>False</button>
+                  <button className="" onClick={(e) => this.filterByOptions('launch', e)}>True</button>
+                  <button className="" onClick={(e) => this.filterByOptions('launch', e)}>False</button>
 
                 </div>
               </div>
@@ -141,8 +141,8 @@ export default class AppDev extends Component {
 
               <div className="">
                 <div className="">
-                  <button className="" onClick={(e) => this.filterByYear('landing', e)}>True</button>
-                  <button className="" onClick={(e) => this.filterByYear('landing', e)}>False</button>
+                  <button className="" onClick={(e) => this.filterByOptions('landing', e)}>True</button>
+                  <button className="" onClick={(e) => this.filterByOptions('landing', e)}>False</button>
                 </div>
               </div>
             </ul>
@@ -165,7 +165,12 @@ export default class AppDev extends Component {
                 </li>
               ))}
             </ul>
+            <footer>
+            <h4> Developed By: </h4>
+            <h4> Prabakaran Jayapalan </h4>
+            </footer>
           </article>
+          
 
         </section>
 
