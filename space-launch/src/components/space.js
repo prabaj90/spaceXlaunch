@@ -19,6 +19,7 @@ export default class AppDev extends Component {
           Accept: "application/json",
           "Content-Type": "application/json"
         }
+        
       })
       .then(({ data }) => {
         this.setState({

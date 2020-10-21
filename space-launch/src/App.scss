@@ -202,6 +202,13 @@ body {
 		}
 
 	}
+	footer{
+		text-align: center;
+		& h4{
+			display: block !important;
+			color: black;
+		}
+	}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px){
@@ -235,6 +242,13 @@ header {
   text-align: left;
   font-size: 18px;
   color: black;
+}
+footer{
+	text-align: center;
+	& h4{
+		display: inline-block;
+		color: black;
+	}
 }
 /* Create two columns/boxes that floats next to each other */
 nav {
