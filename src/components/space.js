@@ -37,52 +37,27 @@ export default class AppDev extends Component {
     const { allPosts, year, launchPost, landingSuccess  } = this.state;
     let url = URL;
     if(key === 'year'){
-     let year = e.target.innerHTML;
-    if(launchPost && landingSuccess){
-       url = URL+'&launch_success='+launchPost+'&land_success='+landingSuccess+'&launch_year='+year;
-     }
-    else if(launchPost){
-      url = URL+'&launch_success='+launchPost+'&launch_year='+year;
-     }
-    else if(landingSuccess){
-      url = URL+'&land_success='+landingSuccess+'&launch_year='+year;
-     }
-    else {
-      url = URL+'&launch_year='+year;
-    }
+    let year = e.target.innerHTML;
+    (typeof(launchPost)==='boolean' && (launchPost || !launchPost) && typeof(landingSuccess)==='boolean' && (landingSuccess || !landingSuccess)) ? url = URL+'&launch_success='+launchPost+'&land_success='+landingSuccess+'&launch_year='+year :
+    (typeof(launchPost)==='boolean' && (launchPost || !launchPost)) ? url = URL+'&launch_success='+launchPost+'&launch_year='+year :
+    (typeof(landingSuccess)==='boolean' &&(landingSuccess || !landingSuccess)) ? url = URL+'&land_success='+landingSuccess+'&launch_year='+year :
+    url = URL+'&launch_year='+year;
     this.setState({year: year})
    }
    else if(key === 'launch'){
     let launchPost = JSON.parse((e.target.innerHTML).toLowerCase());
-   if((landingSuccess || !landingSuccess) && year){
-      url = URL+'&launch_success='+launchPost+'&land_success='+landingSuccess+'&launch_year='+year;
-    }
-   else if(year){
-     url = URL+'&launch_success='+launchPost+'&launch_year='+year;
-    }
-   else if(landingSuccess || !landingSuccess){
-     url = URL+'&land_success='+landingSuccess+'&launch_success='+launchPost;
-    }
-   else {
-     url = URL+'&launch_success='+launchPost;
-    }
-  
-  this.setState({launchPost: launchPost});  
+    (typeof(landingSuccess)==='boolean' && (landingSuccess || !landingSuccess) && year) ? url = URL+'&launch_success='+launchPost+'&land_success='+landingSuccess+'&launch_year='+year :
+    (year) ? url = URL+'&launch_success='+launchPost+'&launch_year='+year :
+    (typeof(landingSuccess)==='boolean' && (landingSuccess || !landingSuccess)) ? url = URL+'&land_success='+landingSuccess+'&launch_success='+launchPost :
+    url = URL+'&launch_success='+launchPost;
+    this.setState({launchPost: launchPost});  
   }
   else if(key === 'landing'){
     let landingSuccess = JSON.parse((e.target.innerHTML).toLowerCase());
-   if((launchPost || !launchPost) && year){
-      url = URL+'&launch_success='+launchPost+'&land_success='+landingSuccess+'&launch_year='+year;
-    }
-   else if(year){
-     url = URL+'&land_success='+landingSuccess+'&launch_year='+year;
-    }
-   else if(launchPost || !launchPost){
-     url = URL+'&land_success='+landingSuccess+'&launch_success='+launchPost;
-    }
-   else {
-     url = URL+'&land_success='+landingSuccess;
-    }
+    (typeof(launchPost)==='boolean' && (launchPost || !launchPost) && year) ? url = URL+'&launch_success='+launchPost+'&land_success='+landingSuccess+'&launch_year='+year :
+    (year) ? url = URL+'&land_success='+landingSuccess+'&launch_year='+year :
+    (typeof(launchPost)==='boolean' && (launchPost || !launchPost)) ? url = URL+'&land_success='+landingSuccess+'&launch_success='+launchPost :
+    url = URL+'&land_success='+landingSuccess;
     this.setState({landingSuccess: landingSuccess});
   }
   axios
