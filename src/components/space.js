@@ -8,7 +8,6 @@ export default class AppDev extends Component {
     super(props);
     this.state = {
       post: [],
-      allPosts: [],
       year:'',
       launchPost:'',
       landingSuccess:''
@@ -16,25 +15,28 @@ export default class AppDev extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get(URL, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
+    this.getApi(URL);
+  }
 
-      })
-      .then(({ data }) => {
-        this.setState({
-          post: data,
-          allPosts: data 
-        });
-      })
-      .catch(err => { });
+  getApi=(URL)=>{
+    axios
+    .get(URL, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+
+    })
+    .then(({ data }) => {
+      this.setState({
+        post: data
+      });
+    })
+    .catch(err => { });
   }
 
   filterByOptions=(key, e)=>{
-    const { allPosts, year, launchPost, landingSuccess  } = this.state;
+    const { year, launchPost, landingSuccess  } = this.state;
     let url = URL;
     if(key === 'year'){
     let year = e.target.innerHTML;
@@ -60,24 +62,10 @@ export default class AppDev extends Component {
     url = URL+'&land_success='+landingSuccess;
     this.setState({landingSuccess: landingSuccess});
   }
-  axios
-  .get(url, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    }
-
-  })
-  .then(({ data }) => {
-    this.setState({
-      post: data
-    });
-  })
-  .catch(err => { });
-
+  this.getApi(url);
   }
   render() {
-    const {year, landingSuccess, launchPost} = this.state;
+    const {year, landingSuccess, launchPost, post} = this.state;
     return (
 
       <div className="container-fluid">
@@ -173,7 +161,7 @@ export default class AppDev extends Component {
           <article>
             <ul className="data-list">
               {/* post items mapped in a list linked to onKeyUp function */}
-              {this.state.post.map((item, index) => (
+              {post.map((item, index) => (
                 <li className={"block-" + index}>
                   <div className="title">
                     <img src={item.links.mission_patch_small} />
@@ -190,10 +178,10 @@ export default class AppDev extends Component {
                 </li>
               ))}
             </ul>
-            <footer>
+            {post.length >0 ?<footer>
             <h4> Developed By: </h4>
             <h4> Prabakaran Jayapalan </h4>
-            </footer>
+            </footer> : ''}
           </article>
           
 
