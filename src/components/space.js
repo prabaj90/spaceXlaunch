@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Loader from 'react-loader-spinner'
 import { URL } from './constant';
 
 export default class AppDev extends Component {
@@ -10,11 +11,13 @@ export default class AppDev extends Component {
       post: [],
       year: '',
       launchPost: '',
-      landingSuccess: ''
+      landingSuccess: '',
+      loaderStage: false
     };
   }
 
   componentDidMount() {
+    this.setState({loaderStage: true})
     this.getApi(URL);
   }
 
@@ -28,7 +31,8 @@ export default class AppDev extends Component {
       })
       .then(({ data }) => {
         this.setState({
-          post: data
+          post: data,
+          loaderStage: false
         });
       })
       .catch(err => { });
@@ -64,7 +68,7 @@ export default class AppDev extends Component {
     this.getApi(url);
   }
   render() {
-    const { year, landingSuccess, launchPost, post } = this.state;
+    const { year, landingSuccess, launchPost, post, loaderStage } = this.state;
     return (
       <div className="container-fluid">
         <header>
@@ -140,8 +144,14 @@ export default class AppDev extends Component {
               </div>
             </ul>
           </nav>
+          {loaderStage ? <div className='loader'><Loader
+            type="ThreeDots"
+            color="#fff"
+            height={400}
+            width={400}
+          /> </div>: ''}
           <article>
-            {post.length <= 0 ? <div>No Results Found</div> :
+            {post.length <= 0 && !loaderStage ? <div>No Results Found</div> :
               <ul className="data-list">
                 {post.map((item, index) => (
                   <li className={"block-" + index}>
