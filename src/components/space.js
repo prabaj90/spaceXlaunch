@@ -141,24 +141,26 @@ export default class AppDev extends Component {
             </ul>
           </nav>
           <article>
-            <ul className="data-list">
-              {post.map((item, index) => (
-                <li className={"block-" + index}>
-                  <div className="title">
-                    <img src={item.links.mission_patch_small} />
-                    <h3> {item.mission_name}  #{item.flight_number}</h3>
-                    <h5>Mission Ids: </h5>
-                    <h4> {item.mission_id.length === 0 ? "0" : item.mission_id.map((id, index) => <span key={index}>{(index ? ', ' : '') + id}</span>)}</h4>
-                    <h5>Launch Year: </h5>
-                    <h4> {item.launch_year}</h4>
-                    <h5>Successful Launch: </h5>
-                    <h4> {item.launch_success ? "True" : "False"}</h4>
-                    <h5>Successful Landing: </h5>
-                    <h4> {item.rocket.first_stage.cores[0].land_success ? "True" : (item.rocket.first_stage.cores[0].land_success == false) ? "False" : 'NULL'}</h4>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            {post.length <= 0 ? <div>No Results Found</div> :
+              <ul className="data-list">
+                {post.map((item, index) => (
+                  <li className={"block-" + index}>
+                    <div className="title">
+                      <img src={item.links.mission_patch_small} />
+                      <h3> {item.mission_name}  #{item.flight_number}</h3>
+                      <h5>Mission Ids: </h5>
+                      <h4> {item.mission_id.length === 0 ? "0" : item.mission_id.map((id, index) => <span key={index}>{(index ? ', ' : '') + id}</span>)}</h4>
+                      <h5>Launch Year: </h5>
+                      <h4> {item.launch_year}</h4>
+                      <h5>Successful Launch: </h5>
+                      <h4> {item.launch_success ? "True" : "False"}</h4>
+                      <h5>Successful Landing: </h5>
+                      <h4> {item.rocket.first_stage.cores[0].land_success ? "True" : (item.rocket.first_stage.cores[0].land_success == false) ? "False" : 'NULL'}</h4>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            }
             {post.length > 0 ? <footer>
               <h4> Developed By: </h4>
               <h4> Prabakaran Jayapalan </h4>
