@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Loader from 'react-loader-spinner'
-import { URL } from './constant';
+import { URL, yearWise } from './constant';
 
 export default class AppDev extends Component {
 
@@ -81,50 +81,10 @@ export default class AppDev extends Component {
               <p>Launch Year</p>
               <div className="">
                 <div className="">
-                  <button className={year === '2006' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2006</button>
-                  <button className={year === '2007' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2007</button>
-                </div>
-              </div>
-              <div className="">
-                <div className="">
-                  <button className={year === '2008' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2008</button>
-                  <button className={year === '2009' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2009</button>
-                </div>
-              </div>
-              <div className="">
-                <div className="">
-                  <button className={year === '2010' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2010</button>
-                  <button className={year === '2011' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2011</button>
-                </div>
-              </div>
-              <div className="">
-                <div className="">
-                  <button className={year === '2012' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2012</button>
-                  <button className={year === '2013' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2013</button>
-                </div>
-              </div>
-              <div className="">
-                <div className="">
-                  <button className={year === '2014' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2014</button>
-                  <button className={year === '2015' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2015</button>
-                </div>
-              </div>
-              <div className="">
-                <div className="">
-                  <button className={year === '2016' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2016</button>
-                  <button className={year === '2017' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2017</button>
-                </div>
-              </div>
-              <div className="">
-                <div className="">
-                  <button className={year === '2018' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2018</button>
-                  <button className={year === '2019' ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>2019</button>
-                </div>
-              </div>
-              <div className="">
-                <div className="">
-                  <button className={year === '2020' ? "selectedButton" : ''} onClick={() => this.filterByOptions('2020')}>2020</button>
-                </div>
+                    {yearWise.map((item) =>(
+                        <button className={year === item ? "selectedButton" : ''} onClick={(e) => this.filterByOptions('year', e)}>{item}</button>
+                    ))}
+               </div>
               </div>
               <br />
               <p>Successful Launch</p>
